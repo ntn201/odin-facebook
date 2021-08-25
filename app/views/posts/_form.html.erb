@@ -1,0 +1,13 @@
+<%= form_for :post, url:posts_path, method: :post do |form| %>
+    <div>
+        <%= form.label :caption %>
+        <%= form.text_field :caption %>
+    </div>
+    <div>
+        <%= form.label :body %>
+        <%= form.text_area :body %>
+    </div>
+    <div>
+        <%= form.submit "Post" %>
+    </div>
+<% end %>

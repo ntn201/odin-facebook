@@ -1,0 +1,29 @@
+<h2>You are having friend requests from</h2>
+<ul>
+<% current_user.requesting_friends.each do |user| %>
+    <li>
+        <h3><%= user.full_name %></h3>
+        <%= link_to "Accept friend request", friend_ships_path(friend_id: user.id), :method => :post %>
+    </li>
+<% end %>
+</ul>
+
+<h2>More people to connect</h2>
+<ul>
+<% @users.each do |user| %>
+    <%if !current_user.requesting_friends.include?(user)%>
+        <% if !current_user.friend_with?(user.id) %>
+            <li>
+                <h3><%= user.full_name %></h3>
+                <% if current_user.waiting_friends.include?(user) %>
+                    <p>Waiting for this user to accept your friend request.</p>
+                <% else %>
+                    <%= link_to "Add friend", friend_requests_path(friend_id: user.id), :method => :post %>
+                <% end %>
+            </li>
+        <% end %>
+    <%end%>
+<% end %>
+</ul>
+
+<%= link_to "Back to home page", root_path %>

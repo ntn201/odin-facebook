@@ -1,0 +1,4 @@
+<%= form_for :comment, url: post_comments_path(post_id), method: :post do |form| %>
+    <%= form.text_area :content %>
+    <%= form.submit "Comment" %>
+<% end %>

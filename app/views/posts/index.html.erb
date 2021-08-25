@@ -1,0 +1,40 @@
+<h1>Welcome, <%= current_user.full_name %></h1>
+<%= link_to "Your profile", user_path(current_user) %>
+<%= link_to 'Logout', destroy_user_session_path, method: :delete %>
+<% if flash[:errors] %>
+    <h3><% flash[:errors] %></h3>
+<% end %>
+
+<div>
+    <h2>Find more friends<h2>
+    <%= link_to "Users list", users_path %>
+</div>
+
+<div>
+    <p>Want to share anythings?</p>
+    <%= render "posts/form" %>
+</div>
+
+<h2>Let's explore the wolrd with us!!!</h2>
+
+<ul>
+    <% @posts.each do |post| %>
+        <li>
+            <h3><%= post.caption %></h3>
+            <p>Posted by: <%= post.user.full_name %></p>
+            <p><%= post.body %></p>
+            <span>Likes: <%= post.likes.count %></span>
+            <% if post.liked_by?(current_user) %>
+                <%= link_to "Unlike", post_like_path(:id=>Like.where(user_id:current_user.id, post_id:post.id)[0].id, :post_id=>post.id), method: :delete %> 
+            <% else %>
+                <%= link_to "Like this post", post_likes_path(post_id: post.id), method: :post %>
+            <% end %>
+            <p>Write a comment</p>
+            <%= render "comments/form", post_id: post.id %>
+            <h4>Comments</h4>
+            <% post.comments.each do |comment| %>
+                <p><%= comment.user.full_name %>: <%= comment.content %></p>
+            <% end %>
+        </li>
+    <% end %>
+</ul>

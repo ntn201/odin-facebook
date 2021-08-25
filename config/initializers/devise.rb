@@ -16,7 +16,7 @@ Devise.setup do |config|
   # by default. You can change it below and use your own secret key.
   # config.secret_key = 'a2fbf837a32ab30a37f5ed3e6ecd35ad5997d163780c9f703d5b58f833d8b6d5fff9922e3e6317a87f72da5900ef63aca0d878871e5d0af5996ec77f36fa94bc'
 
-  config.omniauth :facebook, Figaro.env.fb_app_id, Figaro.env.fb_app_secret
+  config.omniauth :facebook, Figaro.env.fb_app_id, Figaro.env.fb_app_secret, client_options: { ssl: { ca_path: '/etc/ssl/certs' } }
 
   # ==> Controller configuration
   # Configure the parent class to the devise controllers.

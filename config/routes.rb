@@ -8,7 +8,7 @@ Rails.application.routes.draw do
   resources :friend_ships, only: [:create]
   resources :friend_requests, only: [:create]
 
-  devise_for :users, controllers: {
+  devise_for :users, controllers: => {
     sessions: 'users/sessions',
     registrations: 'users/registrations',
     omniauth_callbacks: 'users/omniauth_callbacks'

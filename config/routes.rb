@@ -1,10 +1,6 @@
 Rails.application.routes.draw do
   root "posts#index"
 
-  # match 'auth/:provider/callback', to: 'sessions#create'
-  # match 'auth/failure', to: redirect('/')
-  # match 'signout', to: 'sessions#destroy', as: 'signout'
-
   resources :posts, only: [:index, :create] do
     resources :comments, only: [:create]
     resources :likes, only: [:create, :destroy]
@@ -14,7 +10,8 @@ Rails.application.routes.draw do
 
   devise_for :users, controllers: {
     sessions: 'users/sessions',
-    registrations: 'users/registrations'
+    registrations: 'users/registrations',
+    omniauth_callbacks: 'users/omniauth_callbacks'
   }
 
   resources :users, only: [:show,:index] do

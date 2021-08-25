@@ -1,8 +1,9 @@
 Rails.application.routes.draw do
-  get 'comments/create'
-  get 'comments/destroy'
-  get 'friend_ships/create'
   root "posts#index"
+
+  # match 'auth/:provider/callback', to: 'sessions#create'
+  # match 'auth/failure', to: redirect('/')
+  # match 'signout', to: 'sessions#destroy', as: 'signout'
 
   resources :posts, only: [:index, :create] do
     resources :comments, only: [:create]
@@ -11,10 +12,10 @@ Rails.application.routes.draw do
   resources :friend_ships, only: [:create]
   resources :friend_requests, only: [:create]
 
-  devise_for :users, controllers: {
-    sessions: 'users/sessions',
-    registrations: 'users/registrations'
-  }
+  # devise_for :users, controllers: {
+  #   sessions: 'users/sessions',
+  #   registrations: 'users/registrations'
+  # }
 
   resources :users, only: [:show,:index] do
     resources :photos, only: [:new, :create, :edit, :destroy]

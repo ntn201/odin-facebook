@@ -12,10 +12,10 @@ Rails.application.routes.draw do
   resources :friend_ships, only: [:create]
   resources :friend_requests, only: [:create]
 
-  # devise_for :users, controllers: {
-  #   sessions: 'users/sessions',
-  #   registrations: 'users/registrations'
-  # }
+  devise_for :users, controllers: {
+    sessions: 'users/sessions',
+    registrations: 'users/registrations'
+  }
 
   resources :users, only: [:show,:index] do
     resources :photos, only: [:new, :create, :edit, :destroy]

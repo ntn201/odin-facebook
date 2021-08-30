@@ -5,6 +5,10 @@ class PostsController < ApplicationController
         @posts = current_user.friends.reduce(Array.new) { |posts, friend| posts + friend.posts }
         @posts += current_user.posts
         @posts.sort_by { |post| post.updated_at }
+        respond_to do |format|
+            format.json { render json: @posts }
+            format.html { render :index }
+        end
     end
 
     def create

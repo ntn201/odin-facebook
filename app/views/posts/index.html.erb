@@ -1,3 +1,6 @@
+<%
+=begin%>
+ 
 <h1>Welcome, <%= current_user.full_name %></h1>
 <%= link_to "Your profile", user_path(current_user) %>
 <%= link_to 'Logout', destroy_user_session_path, method: :delete %>
@@ -37,4 +40,9 @@
             <% end %>
         </li>
     <% end %>
-</ul>
+</ul> 
+ 
+<%
+=end%>
+
+<%= react_component("posts/PostView", {user_id: current_user.id, authenticity_token: form_authenticity_token}) %>

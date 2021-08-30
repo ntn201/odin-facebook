@@ -28,6 +28,8 @@ gem 'omniauth-facebook'
 gem 'omniauth-rails_csrf_protection'
 # Figaro for env variable
 gem 'figaro'
+# React frontend
+gem 'react-rails'
 
 # Use Active Storage variant
 gem 'image_processing', '~> 1.2'
